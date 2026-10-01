@@ -1,0 +1,8 @@
+services:
+  tests:
+    build: .
+    init: true
+    ipc: host
+    volumes:
+      - ./playwright-report:/work/playwright-report
+      - ./test-results:/work/test-results

@@ -1,0 +1,16 @@
+{
+  "name": "zone01-testing-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Educational Playwright test harness for the public TodoMVC demo",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:broken": "node scripts/broken-run.cjs",
+    "report": "playwright show-report",
+    "report:broken": "playwright show-report playwright-report-broken"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}
