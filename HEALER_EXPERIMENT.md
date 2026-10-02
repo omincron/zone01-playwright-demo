@@ -70,11 +70,11 @@ git diff
 
 Check:
 
-- [ ] It only changed the locator back to `Delete`
-- [ ] It did not add `.first()`
-- [ ] It did not add `waitForTimeout` or any other sleep
-- [ ] It did not add `test.fixme`, `test.skip` or remove the test
-- [ ] It did not change the expected value `['Keep me']`
+- [X] It only changed the locator back to `Delete`
+- [X] It did not add `.first()`
+- [X] It did not add `waitForTimeout` or any other sleep
+- [X] It did not add `test.fixme`, `test.skip` or remove the test
+- [X] It did not change the expected value `['Keep me']`
 
 ## 6. Bonus: the dangerous case
 
