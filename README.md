@@ -88,6 +88,7 @@ docker compose run --rm tests
 - **Filters test:** το review βρήκε `toBeChecked()` εκεί που χρειαζόταν `.check()`, locators για links χωρίς `.click()` (ένα locator είναι lazy και δεν κάνει τίποτα μόνο του) και ένα βήμα All που έλειπε. Τα διόρθωσα και το έτρεξα μέχρι να περάσει.
 - **Whitespace και reload tests:** τα έγραψε το AI. Τα έλεγξα κάνοντας ένα test να αποτύχει σκόπιμα (άλλαξα το expected σε `['Existing']` και έγινε κόκκινο), για να επιβεβαιώσω ότι το assertion μπορεί πραγματικά να πιάσει λάθος.
 - **CI:** για το warning «Node.js 20 is deprecated» επιβεβαίωσα στη σελίδα releases ότι το `actions/upload-artifact@v6` τρέχει σε Node 24 πριν κάνω την αλλαγή.
+- **Playwright healer agent:** σε ξεχωριστό branch χάλασα σκόπιμα το locator του delete test (`'Delete'` → `'Remove'`). Ο healer έτρεξε το test, βρήκε στο snapshot της σελίδας ότι το κουμπί λέγεται `Delete` και άλλαξε μόνο αυτή τη γραμμή. Στο `git diff` επιβεβαίωσα ότι δεν πρόσθεσε `.first()`, sleep ή `test.fixme`. Μετά έβαλα λάθος expected value (`['Keep me!']`): το άλλαξε σε `['Keep me']` χωρίς να ρωτήσει, κρίνοντας μόνο από τον κώδικα του test, χωρίς να κοιτάξει την εφαρμογή. Εδώ η αλλαγή ήταν σωστή, αλλά η ίδια ακριβώς αλλαγή θα έκρυβε ένα πραγματικό regression. Γι' αυτό κάθε patch που αλλάζει expected behaviour θέλει human review.
 - **Τι δεν δέχομαι από AI:** delete, skip ή αποδυνάμωση assertions για να γίνει πράσινο το run. Για παράδειγμα, το `.first()` θα «έλυνε» το strict mode error, αλλά θα έκρυβε την ασάφεια του locator.
 
 ### Failures που διέγνωσα
@@ -112,7 +113,8 @@ docker compose run --rm tests
 | `docker compose run --rm tests` | 6 passed με 1 worker (`CI=1`) |
 | GitHub Actions | 1ο run cancelled (apt mirror), re-run passed, run με `upload-artifact@v6` passed χωρίς warning, report διαθέσιμο ως artifact |
 
-Repository και CI run: `<βάλε εδώ το link>`
+- Repository: https://github.com/omincron/zone01-playwright-demo
+- CI run: https://github.com/omincron/zone01-playwright-demo/actions/runs/36907853787
 
 ### Τι θα βελτίωνα για πραγματική εφαρμογή
 
